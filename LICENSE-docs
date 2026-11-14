@@ -1,0 +1,20 @@
+Documentation licence
+
+Copyright (c) 2026 nikon-raw-playback contributors
+
+The documentation in this repository (README.md, build/README.md and every file in docs/)
+is licensed under the Creative Commons Attribution 4.0 International licence (CC BY 4.0).
+
+You may share and adapt the material for any purpose, even commercially, if you give
+appropriate credit, link to the licence, and say if you made changes.
+
+Licence text:  https://creativecommons.org/licenses/by/4.0/legalcode
+Summary:       https://creativecommons.org/licenses/by/4.0/
+
+The code and scripts in this repository (everything outside README.md, build/README.md and docs/)
+are licensed under the MIT licence. See the file LICENSE. Two files are the exception:
+
+- build/patches/ffmpeg-9.0.2-tico_raw.patch adds files to FFmpeg. It is under the licence of the
+  FFmpeg fork, LGPL-2.1-or-later.
+- build/patches/deps-buildscripts.patch is a one-line change to a file of iina/deps-buildscripts.
+  Our changed line is offered under the MIT licence; the two context lines belong to that project.

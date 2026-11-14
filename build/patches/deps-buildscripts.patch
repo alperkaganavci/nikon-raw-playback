@@ -1,0 +1,9 @@
+diff --git a/buildscripts/common.sh b/buildscripts/common.sh
+index 536c33a..809f836 100644
+--- a/buildscripts/common.sh
++++ b/buildscripts/common.sh
+@@ -13,3 +13,3 @@ export OUTPUT_DIR="${ROOT_DIR}/output"
+ export MACOS_SDK="$(xcrun --show-sdk-path)"
+-JOBS=$(sysctl -n hw.ncpu)
++JOBS="${JOBS:-$(sysctl -n hw.ncpu)}"
+ 

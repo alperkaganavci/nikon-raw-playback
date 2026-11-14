@@ -1,0 +1,9 @@
+# Reference data and test clips (made by the oracle and the tools; see README.md, "Run the tests")
+testdata/
+
+# Build output
+build/work/
+oracle/target/
+__pycache__/
+*.pyc
+.DS_Store

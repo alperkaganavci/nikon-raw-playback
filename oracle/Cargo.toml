@@ -1,0 +1,16 @@
+# Test oracle for the TICO RAW decoder. It links blue-compressor as a library and runs it as a
+# black box to produce reference output. It is not part of the decoder, and the decoder authors
+# did not read this folder (see docs/clean-room.md).
+[package]
+name = "ticoraw-oracle"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+# blue-compressor pinned to one commit (2026-11-07).
+# Default features (metal, wgpu) are off: the oracle uses only the CPU decode path.
+bluecompress = { git = "https://github.com/redn3/blue-compressor", rev = "4d35f31", default-features = false }
+
+[profile.release]
+opt-level = 3
