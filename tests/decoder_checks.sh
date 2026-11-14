@@ -1346,13 +1346,15 @@ check_iina_raw_bundle() {
 import os, plistlib, sys
 
 info = plistlib.load(open(sys.argv[1], "rb"))
-if "SUFeedURL" in info:
-    print("SUFeedURL is present in Info.plist")
+# The Sparkle updater is removed: no Sparkle keys (feed URL, public keys, automatic checks)
+# in Info.plist and no Sparkle framework in the bundle.
+sparkle_keys = sorted(k for k in info if k.startswith("SU"))
+if sparkle_keys:
+    print("Info.plist has Sparkle keys: %s" % ", ".join(sparkle_keys))
     sys.exit(1)
-for key in ("SUEnableAutomaticChecks", "SUAutomaticallyUpdate"):
-    if info.get(key) is not False:
-        print("%s is %r, expected NO" % (key, info.get(key)))
-        sys.exit(1)
+if os.path.exists(os.path.join(os.path.dirname(sys.argv[1]), "Frameworks", "Sparkle.framework")):
+    print("Contents/Frameworks/Sparkle.framework is present")
+    sys.exit(1)
 types = info.get("CFBundleDocumentTypes", [])
 if len(types) != 2:
     print("CFBundleDocumentTypes has %d entries, expected exactly 2 (R3D and NEV)" % len(types))
