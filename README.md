@@ -60,7 +60,7 @@ Do this only if you trust the source of the download. If you prefer, you can
 4. Open IINA RAW once. Then Finder registers the thumbnail and preview extensions.
    If thumbnails do not show, run `qlmanage -r` and `qlmanage -r cache`, then reopen Finder.
 
-IINA RAW 1.5.1-raw.1 has no auto-update. The IINA updater is turned off, so it can never
+IINA RAW 1.5.1-raw.1 has no auto-update. The IINA updater is removed, so it can never
 replace the app with stock IINA. New versions come as new GitHub releases.
 
 How to use the app: [`docs/HOW-TO-USE.md`](docs/HOW-TO-USE.md).
@@ -195,7 +195,8 @@ you before you ship the decoder.
   MIT; its two context lines belong to that project). See [`LICENSE-docs`](LICENSE-docs).
 - The documentation (`README.md`, `build/README.md` and `docs/`): CC BY 4.0
   ([`LICENSE-docs`](LICENSE-docs)).
-- The FFmpeg fork: LGPL-2.1-or-later, the licence of FFmpeg.
+- The FFmpeg fork: LGPL-2.1-or-later, the licence of FFmpeg. The FFmpeg build inside the IINA RAW
+  app uses `--enable-gpl --enable-version3`, so those binaries are GPL-3.0.
 - The IINA fork: GPL-3.0, the licence of IINA.
 
 ## 🚫 Not affiliated

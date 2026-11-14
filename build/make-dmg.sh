@@ -104,7 +104,7 @@ mkdir -p "$STAGE"
 note "copying $APP_BASENAME"
 ditto --norsrc --noextattr "$APP" "$COPY"
 [ -f "$COPY/Contents/Info.plist" ] || die "no Contents/Info.plist in $APP"
-if find "$COPY" -name '*.framework' -maxdepth 4 -type d | grep -q .; then
+if find "$COPY" -name '*.framework' -type d | grep -q .; then
     die "the app holds a .framework bundle; this script signs dylibs, .appex, .xpc and .app bundles only"
 fi
 
@@ -124,7 +124,7 @@ for p in prefixes:
     if len(p) < len(stem):
         sys.exit("make-dmg: scrub prefix %r is shorter than the neutral path %r (%d < %d bytes)"
                  % (p.decode(), stem.decode(), len(p), len(stem)))
-    if p in stem or stem.startswith(p):
+    if p in stem or stem.startswith(p) or p.startswith(stem):
         sys.exit("make-dmg: scrub prefix %r overlaps the neutral path" % p.decode())
     pad = len(p) - len(stem)
     # Neutral stem, then a filler path segment: "/" plus underscores. Same length as the prefix.

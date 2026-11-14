@@ -120,8 +120,15 @@ the build (use `NO_INSTALL=1` if you only want the DMG):
 
 ```
 build/make-dmg.sh --app "build/work/iina-derived/Build/Products/Release/IINA RAW.app" \
-  --version 1.5.1-raw.1 --out build/dist
+  --version 1.5.1-raw.1 --out build/dist --scrub-prefix "$PWD/build/work"
 ```
+
+Always give `--scrub-prefix` for each folder in which you built the libraries and the app. The
+script fails if the binaries still hold a path under `/Users/` after the scrub.
+
+The script needs `python3` and network access to PyPI: it installs a pinned `dmgbuild` in a
+temporary venv for the Finder window layout. If that fails, it prints a warning and builds a
+plain DMG without the layout.
 
 | Option | Meaning |
 | --- | --- |
