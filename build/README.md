@@ -4,6 +4,16 @@ This folder builds IINA RAW, the IINA-based player for Nikon raw clips, from pub
 The build runs on an Apple Silicon Mac (arm64). It does not need anything that is not in a
 public repository.
 
+Only want to use the app? Get the installer from the
+[latest release](https://github.com/alperkaganavci/nikon-raw-playback/releases/latest) instead.
+
+| I want to... | Go to |
+| --- | --- |
+| Build and install the app | [Build and install in one step](#build-and-install-in-one-step) |
+| Make an installer DMG from a built app | [Make an installer DMG](#make-an-installer-dmg) |
+| Build only the decoder, for the checks | [Only the decoder](#only-the-decoder-an-ffmpeg-build-for-the-checks) |
+| Fix a problem | [Problems](#problems) |
+
 ## What you need
 
 - A Mac with Apple Silicon and a current macOS.
@@ -102,6 +112,38 @@ cd ../../..
 # install
 tools/install_iina_raw.sh "build/work/iina-derived/Build/Products/Release/IINA RAW.app"
 ```
+
+## Make an installer DMG
+
+`build/make-dmg.sh` turns a built `IINA RAW.app` into a DMG that you can share. Run it after
+the build (use `NO_INSTALL=1` if you only want the DMG):
+
+```
+build/make-dmg.sh --app "build/work/iina-derived/Build/Products/Release/IINA RAW.app" \
+  --version 1.5.1-raw.1 --out build/dist
+```
+
+| Option | Meaning |
+| --- | --- |
+| `--app <path>` | The built `IINA RAW.app`. The script copies it and does not change the original. |
+| `--version <ver>` | The version for the DMG name, for example `1.5.1-raw.1`. |
+| `--out <dir>` | The folder for the finished DMG. |
+| `--scrub-prefix <path>` | A local build folder to remove from the binaries. You can give this option more than once. |
+
+The script does these steps:
+
+1. Copies the app.
+2. Replaces each `--scrub-prefix` path in the binaries with a neutral path of the same length.
+   The libraries keep the path of the folder in which they were built, and this step removes
+   it from a shared app.
+3. Signs the app again, ad hoc.
+4. Checks the result.
+5. Builds the DMG with a link to **Applications**.
+
+The DMG is ad-hoc signed and not notarized. A user who installs it must allow the first
+launch (**System Settings → Privacy & Security → Open Anyway**, or
+`xattr -dr com.apple.quarantine "/Applications/IINA RAW.app"`). See the main
+[README](../README.md), section "Install".
 
 ## Signing and the Quick Look extensions
 
